@@ -1,0 +1,2 @@
+#!/bin/sh
+flock -x -n /tmp/i3lock.lock -c "/usr/bin/lockandbluri3.sh"

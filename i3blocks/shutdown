@@ -1,0 +1,17 @@
+#!/bin/sh
+color_foreground="#383830"
+color_background="#f92672"
+color_background_next="#f8f8f2"
+color_separator="#383830"
+
+cmd="rofishutdown"
+
+if [ -z "$color_separator" ]; then
+	echo "<span background=\"$color_background_next\" foreground=\"$color_background\"></span><span background=\"$color_background\" foreground=\"$color_foreground\"></span>"
+else
+	echo "<span background=\"$color_separator\" foreground=\"$color_background\"></span><span background=\"$color_background\" foreground=\"$color_foreground\"> </span>"
+fi
+
+case $BLOCK_BUTTON in
+	1) eval "$cmd"	;;
+esac

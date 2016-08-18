@@ -1,0 +1,272 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+#
+# Sway is a work in progress. Some of these defaults are currently unimplemented.
+
+# Font
+set $mainfont 		Fantasque Sans Mono
+set $mainfontsize 	13px
+#font pango:Noto Mono, Unifont Upper CSUR 9
+#font pango:Inconsolata, FontAwesome 13px
+font pango:$mainfont, FontAwesome, Symbola $mainfontsize
+
+# $i3-theme-window
+set $color00		#272822
+set $color01		#f92672
+set $color02		#a6e22e
+set $color03		#f4bf75
+set $color04		#66d9ef
+set $color05		#ae81ff
+set $color06		#a1efe4
+set $color07		#f8f8f2
+set $color08		#75715e
+set $color09		#f92672
+set $color10		#a6e22e
+set $color11		#f4bf75
+set $color12		#66d9ef
+set $color13		#ae81ff
+set $color14		#a1efe4
+set $color15		#f9f8f5
+set $color16		#fd971f
+set $color17		#cc6633
+set $color18		#383830
+set $color19		#49483e
+set $color20		#a59f85
+set $color21		#f5f4f1
+set $color_foreground		#f8f8f2
+set $color_background		#272822
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Your preferred terminal emulator
+set $term st
+# Your preferred application launcher
+#set $menu dmenu_run -fn 'Fira Mono:style=Regular:pixelsize=14' -nb '#323232'
+#set $menu dmenu_run -p "❱" -i -b -fn 'Noto Mono:pixelsize=14' -nb '#323232'
+set $menu rofit -show run
+#set $menu lighthouse | sh
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/sway/)
+#output * bg /home/alex/NWP/1463562374765.jpg fill
+exec --no-startup-id feh --bg-fill /home/alex/NWP/1469305470103.png
+
+#
+# Example output configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running swaymsg -t get_outputs
+
+### Key bindings
+#
+# Basics:
+#
+# start a terminal
+bindsym $mod+Return exec --no-startup-id $term
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start your launcher
+bindsym $mod+d exec --no-startup-id $menu
+
+bindsym $mod+c exec --no-startup-id statnot_clr
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit sway (logs you out of your wayland session)
+bindsym $mod+Shift+e exit
+
+# Turn off focus following mouse
+focus_follows_mouse off
+
+# Lock screen
+bindsym $mod+Shift+l exec --no-startup-id i3lock_locked
+
+# Take snapshot
+bindsym $mod+Print exec --no-startup-id import -window root /home/alex/Snapshots/output.png
+
+# WhatsApp
+bindsym $mod+w exec --no-startup-id whatsapp
+#
+# Moving around:
+#
+# Move your focus around with $mod+[h|j|k|l], like vim
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# _move_ the focused window with the same, but add Shift
+bindsym $mod+Control+h move left
+bindsym $mod+Control+j move down
+bindsym $mod+Control+k move up
+bindsym $mod+Control+l move right
+# ditto, with arrow keys
+bindsym $mod+Control+Left move left
+bindsym $mod+Control+Down move down
+bindsym $mod+Control+Up move up
+bindsym $mod+Control+Right move right
+# Resizing windows
+bindsym Mod1+Left resize shrink width 5 px
+bindsym Mod1+Down resize shrink height 5 px
+bindsym Mod1+Up resize grow height 5 px
+bindsym Mod1+Right resize grow width 5 px
+#
+# Workspaces:
+#
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Switch the current container between different layout styles
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# move focus to the parent container
+bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+#
+# Status Bar:
+#
+
+bar {
+#font pango: InconsolataForPowerline Nerd Font 13px
+	font pango: $mainfont, FontAwesome, Symbola $mainfontsize
+#separator_symbol "❰" #U+2770 HEAVY LEFT-POINTING ANGLE BRACKET ORNAMENT
+	separator_symbol "❮"
+	position bottom
+	tray_padding 0
+	colors {
+#statusline #ffffff
+#background #323232
+#inactive_workspace #32323200 #32323200 #5c5c5c
+
+# <workclass> <border> <backg> <text>
+					# lightblue, blue, white
+		focused_workspace 	$color19 $color04 $color18
+					#darkgrey, black, grey
+		active_workspace 	$color19 $color18 $color_foreground
+					#black, darkblack, grey
+		#inactive_workspace	$color08 $darkblack $grey
+					#lightred, red, white
+		urgent_workspace 	$color19 $color01 $color18
+		background              $color18
+		separator               $color19
+		statusline              $color_foreground
+	}
+	status_command i3blocks
+#status_command py3status -c /home/alex/.config/py3status/py3status.conf -i /home/alex/.config/py3status/modules/
+}
+
+#
+# Autostart
+#
+
+# Set keyboard speed
+exec --no-startup-id xset r rate 150 50
+
+# Disable screen energy management
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+
+exec --no-startup-id urxvtd -f
+exec --no-startup-id /usr/bin/kdeconnectd_off_locked
+exec --no-startup-id xss-lock -- /usr/bin/i3lock_locked
+exec --no-startup-id /usr/bin/statnot_locked
+
+# Function keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%;pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%;pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle;pkill -RTMIN+10 i3blocks"
+
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+
+# Window settings
+hide_edge_borders both
+for_window [class="terminology"] border pixel 1
+for_window [class="URxvt"] border pixel 1
+for_window [class="st"] border pixel 1
+for_window [class="konsole"] border pixel 1
+for_window [class="Firefox"] border pixel 0
+for_window [class="mpv"] border pixel 1, floating enable
+for_window [class="feh"] border pixel 1, floating enable
+#for_window [class="lighthouse"] floating enable
+
+# Disable touchpad
+exec --no-startup-id synclient touchpadoff=1

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+match() {
+	case $1 in
+		*youtube.com/watch*)	mpv $1			;;
+		*youtu.be/*)		mpv $1			;;
+		*.webm)			mpv $1			;;
+		*.mp4)			mpv $1			;;
+		*twitter.com/*/*/video/*)	mpv $1		;;
+		*.jpg)			fehurl $1		;;
+		*.jpg:large)		fehurl $1		;;
+		*.png)			fehurl $1		;;
+		*)			x-www-browser $1	;;
+	esac
+}
+
+match "$@"

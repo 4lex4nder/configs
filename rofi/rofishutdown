@@ -1,0 +1,17 @@
+#!/bin/sh
+
+match() {
+	case $1 in
+		Reboot)		systemctl reboot		;;
+		Shutdown)	systemctl poweroff		;;
+		Lock)		i3lock_locked			;;
+		Logout)		i3-msg exit			;;
+		Restart)	i3-msg restart			;;
+	esac
+}
+
+if [ "$1" != "-s" ]; then
+	echo "Lock\nRestart\nLogout\nReboot\nShutdown" | rofit -p "user:" -dmenu | xargs -r rofishutdown -s
+else
+	match "$2"
+fi

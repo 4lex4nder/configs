@@ -1,0 +1,2 @@
+#!/bin/sh
+flock -x -n /tmp/statnot.lock -c "/usr/bin/statnot_tmp"

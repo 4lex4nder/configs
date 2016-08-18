@@ -1,0 +1,13 @@
+--- st.c	2016-07-21 13:13:03.018216450 +0200
++++ st_new.c	2016-07-21 13:15:41.435863038 +0200
+@@ -3038,8 +3038,8 @@
+ 	/* ignore sigpipe for now, in case child exits early */
+ 	oldsigpipe = signal(SIGPIPE, SIG_IGN);
+ 
+-	for(n = 0; n < term.row; n++){
+-		bp = &term.line[n][0];
++	for(n = term.scr - histsize; n < term.scr + term.row; n++){
++		bp = &TLINE(n)[0];
+ 		end = &bp[MIN(tlinelen(n), term.col) - 1];
+ 		if(bp != end || bp->u != ' ')
+ 			for(; bp <= end; ++bp)
