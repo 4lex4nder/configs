@@ -12,6 +12,8 @@ alias coffeebreak='touch ~/Pause/Start-$(date +%x-%H%M) && espeak "Coffee break 
 #alias actrgui='sh /home/alex/actr6/environment/GUI/starter.tcl'
 #alias actr='actrgui &;sleep 5;actrcl'
 alias ls='ls -lah'
+alias usage='du -sh * | sort -h'
+alias make='make -j4'
 
 # Set up the prompt
 

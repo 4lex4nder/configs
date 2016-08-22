@@ -29,6 +29,7 @@ color_separator="#383830"
 icon_map = {'heiter': ['', ''],
             'bewölkt': ['', ''],
             'leicht bewölkt': ['', ''],
+            'teils wolkig': ['', ''],
             'stark bewölkt': ['', ''],
             'leichter Regen': ['', ''],
             'Regen': ['', ''],
@@ -146,7 +147,7 @@ class MyHTMLParser(HTMLParser):
         for i in range(0, len(self.weather)):
             el = self.weather[i]
             if el == 'Niederschlag:':
-                nEl = self.weather[i+1]
+                nEl = self.weather[i+1].strip()
                 if nEl == '<':
                     p_rain = '&lt;' + self.weather[i+2]
                 elif nEl == '>':
@@ -332,7 +333,7 @@ def get_statusmessage():
 
     if len(temp) == 1:
         temp = temp[0] + '°C'
-    elif len(temp) == 2:
+    elif len(temp) > 1:
         temp = temp[0] + '/' + temp[1] + '°C'
 
     full_text = icon + ' ' + temp
