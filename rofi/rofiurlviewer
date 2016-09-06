@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "$@" | xurls | perl -ne 'print unless $seen{$_}++' | perl -e 'print reverse <>' | rofit -p "url:" -dmenu | xargs -r rofiurlhandler

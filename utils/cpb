@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Exit if insufficient arguments
+if [ $# -lt 2 ]
+then
+	echo "Insufficient arguments"
+	exit 0
+fi
+
+if [[ ! "$@" =~ "--bar" ]]
+then
+	cp "$@"
+	exit 0
+fi
+
+args=$(echo "$@" | sed "s/--bar//g")
+
+# Get total size of origin directory/file in bytes
+org=$(eval echo $(echo '$'"`expr $# - 1`"))
+total=$(du -s -b "$org" | awk '{ print $1 }')
+
+# Progress bar has width of 50% of the terminal window
+width_percent=0.5
+width=$(LANG=C printf "%.0f" $(echo "($(tput cols) - 8) * $width_percent" | bc))
+
+cp_p()
+{
+   strace -q -e write cp "$@" 2>&1 | awk '{
+        count += $NF
+            if (count % 10 == 0) {
+	       ratio = count / total_size
+               percent = ratio * 100
+	       wwidth = ratio * width
+               printf "%3d%% [", percent
+               for (i=0;i<=wwidth;i++)
+                  printf "="
+               printf ">"
+               for (i=wwidth;i<width;i++)
+                  printf " "
+               printf "]\r"
+            }
+         }
+         END { print "" }' total_size=$total count=0 width=$width
+}
+
+cp_p $args
